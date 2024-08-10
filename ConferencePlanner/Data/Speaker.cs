@@ -8,11 +8,11 @@ public class Speaker
 
     [Required]
     [StringLength(200)]
-    public string Name { get; set; } = string.Empty;
+    public string? Name { get; set; }
 
     [StringLength(4000)]
-    public string Bio { get; set; } = string.Empty;
+    public string? Bio { get; set; }
 
     [StringLength(1000)]
-    public virtual string WebSite { get; set; } = string.Empty;
+    public virtual string? WebSite { get; set; }
 }
