@@ -1,10 +1,11 @@
 using ConferencePlanner.Data;
-using HotChocolate;
+using ConferencePlanner.Extensions;
+using Microsoft.EntityFrameworkCore;
 
-namespace ConferencePlanner;
+namespace ConferencePlanner.GraphQL;
 
 public class Query
 {
-    public IQueryable<Speaker> GetSpeakers([Service] ApplicationDbContext context) => context.Speakers;
-
+    [UseApplicationDbContext]
+    public Task<List<Speaker>> GetSpeakers(ApplicationDbContext context) => context.Speakers.ToListAsync();
 }
