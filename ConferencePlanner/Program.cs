@@ -1,5 +1,6 @@
 using ConferencePlanner;
 using ConferencePlanner.Data;
+using ConferencePlanner.GraphQL;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,8 @@ builder
 builder
     .Services
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 var app = builder.Build();
 
