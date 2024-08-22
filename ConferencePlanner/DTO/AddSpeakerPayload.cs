@@ -1,7 +1,13 @@
+using ConferencePlanner.Common;
 using ConferencePlanner.Data;
 
-public class AddSpeakerPayload(Speaker speaker)
+namespace ConferencePlanner.DTO;
+public class AddSpeakerPayload : SpeakerPayloadBase
 {
-    public Speaker Speaker { get; } = speaker;
+    public AddSpeakerPayload(Speaker speaker) : base(speaker)
+    { }
+
+    public AddSpeakerPayload(IReadOnlyList<UserError> errors) : base(errors)
+    { }
 }
 

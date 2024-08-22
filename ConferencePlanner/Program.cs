@@ -1,6 +1,7 @@
 using ConferencePlanner.Data;
 using ConferencePlanner.DataLoader;
 using ConferencePlanner.GraphQL;
+using ConferencePlanner.Mutations;
 using ConferencePlanner.Types;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,8 +18,12 @@ builder
     .AddGraphQLServer()
     .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>()
+
+    .AddMutationType(d => d.Name("Mutation"))
+        .AddTypeExtension<SpeakerMutations>()
+
     .AddType<SpeakerType>()
+    .AddGlobalObjectIdentification() // instead of add relay support
     .AddDataLoader<SpeakerByIdDataLoader>()
     .AddDataLoader<SessionByIdDataLoader>()
     .ModifyRequestOptions(options => options.IncludeExceptionDetails = true);

@@ -2,15 +2,16 @@ using ConferencePlanner.Data;
 using ConferencePlanner.DTO;
 using ConferencePlanner.Extensions;
 
-namespace ConferencePlanner.GraphQL;
+namespace ConferencePlanner.Mutations;
 
-public class Mutation
+[ExtendObjectType("Mutation")]
+public class SpeakerMutations
 {
     [UseApplicationDbContext]
     public async Task<AddSpeakerPayload> AddSpeakerAsync(
-        AddSpeakerInput input,
-        [Service] ApplicationDbContext context
-    )
+       AddSpeakerInput input,
+       [Service] ApplicationDbContext context
+   )
     {
         var speaker = new Speaker
         {

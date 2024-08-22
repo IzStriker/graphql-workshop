@@ -8,6 +8,11 @@ public class SpeakerType : ObjectType<Speaker>
 {
     protected override void Configure(IObjectTypeDescriptor<Speaker> descriptor)
     {
+        descriptor
+            .ImplementsNode()
+            .IdField(t => t.Id)
+            .ResolveNode((ctx, id) => ctx.DataLoader<SpeakerByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
+
 
         descriptor
             .Field(t => t.SessionSpeakers)
