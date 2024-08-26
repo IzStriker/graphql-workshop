@@ -10,7 +10,7 @@ public class SpeakerMutations
     [UseApplicationDbContext]
     public async Task<AddSpeakerPayload> AddSpeakerAsync(
        AddSpeakerInput input,
-       [Service] ApplicationDbContext context
+       ApplicationDbContext context
    )
     {
         var speaker = new Speaker
@@ -23,6 +23,7 @@ public class SpeakerMutations
         context.Speakers.Add(speaker);
         await context.SaveChangesAsync();
 
-        return new AddSpeakerPayload(speaker);
+        var value = new AddSpeakerPayload(speaker);
+        return value;
     }
 }

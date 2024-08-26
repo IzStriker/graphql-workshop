@@ -5,12 +5,12 @@ namespace ConferencePlanner.DataLoader;
 
 public class TrackByIdDataLoader(
     IBatchScheduler batchScheduler,
-    IDbContextFactory<ApplicationDbContext> dbContextFactory) : BatchDataLoader<int, Track>(batchScheduler)
+    IDbContextFactory<ApplicationDbContext> dbContextFactory) : BatchDataLoader<int, Track?>(batchScheduler)
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory = dbContextFactory ??
             throw new ArgumentNullException(nameof(dbContextFactory));
 
-    protected override async Task<IReadOnlyDictionary<int, Track>> LoadBatchAsync(
+    protected override async Task<IReadOnlyDictionary<int, Track?>> LoadBatchAsync(
         IReadOnlyList<int> keys,
         CancellationToken cancellationToken)
     {

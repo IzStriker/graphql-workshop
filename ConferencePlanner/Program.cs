@@ -1,5 +1,6 @@
 using ConferencePlanner.Data;
 using ConferencePlanner.DataLoader;
+using ConferencePlanner.DTO;
 using ConferencePlanner.Mutations;
 using ConferencePlanner.Queries;
 using ConferencePlanner.Types;
@@ -19,8 +20,12 @@ builder
     .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
     .AddQueryType(d => d.Name("Query"))
         .AddTypeExtension<SpeakerQueries>()
+        .AddTypeExtension<SessionQueries>()
+        .AddTypeExtension<TrackQueries>()
     .AddMutationType(d => d.Name("Mutation"))
         .AddTypeExtension<SpeakerMutations>()
+        .AddTypeExtension<SessionMutations>()
+        .AddTypeExtension<TrackMutations>()
     .AddType<AttendeeType>()
     .AddType<SessionType>()
     .AddType<SpeakerType>()

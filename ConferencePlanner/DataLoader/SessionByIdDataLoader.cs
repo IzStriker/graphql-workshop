@@ -6,11 +6,11 @@ namespace ConferencePlanner.DataLoader;
 public class SessionByIdDataLoader(
     IBatchScheduler batchScheduler,
     IDbContextFactory<ApplicationDbContext> dbContextFactory
-) : BatchDataLoader<int, Session>(batchScheduler)
+) : BatchDataLoader<int, Session?>(batchScheduler)
 {
     private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
 
-    protected override async Task<IReadOnlyDictionary<int, Session>> LoadBatchAsync(
+    protected override async Task<IReadOnlyDictionary<int, Session?>> LoadBatchAsync(
         IReadOnlyList<int> keys,
         CancellationToken cancellationToken
     )

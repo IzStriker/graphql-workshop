@@ -12,7 +12,8 @@ namespace ConferencePlanner.Types
                 .ImplementsNode()
                 .IdField(t => t.Id)
                 .ResolveNode((ctx, id) =>
-                    ctx.DataLoader<TrackByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
+                    ctx.DataLoader<TrackByIdDataLoader>().LoadAsync(id, ctx.RequestAborted)
+                );
 
             descriptor
                 .Field(t => t.Sessions)
