@@ -8,11 +8,11 @@ namespace ConferencePlanner.Queries;
 [ExtendObjectType("Query")]
 public class TrackQueries
 {
-    [UseApplicationDbContext]
-    public async Task<IEnumerable<Track>> GetTracksAsync(
-        ApplicationDbContext context,
-        CancellationToken cancellationToken
-    ) => await context.Tracks.ToListAsync(cancellationToken);
+    // [UseApplicationDbContext]
+    [UsePaging]
+    public IQueryable<Track> GetTracks(
+        ApplicationDbContext context
+     ) => context.Tracks.OrderBy(t => t.Name);
 
     [UseApplicationDbContext]
     public Task<Track> GetTrackByNameAsync(

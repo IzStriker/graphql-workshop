@@ -1,18 +1,20 @@
-using Microsoft.EntityFrameworkCore;
 using ConferencePlanner.Data;
 using ConferencePlanner.DataLoader;
-using ConferencePlanner.Extensions;
+using ConferencePlanner.Types;
 
 namespace ConferencePlanner.Queries;
 
 [ExtendObjectType("Query")]
 public class SessionQueries
 {
-    [UseApplicationDbContext]
-    public async Task<IEnumerable<Session>> GetSessionsAsync(
-        ApplicationDbContext context,
-        CancellationToken cancellationToken
-    ) => await context.Sessions.ToListAsync(cancellationToken);
+    // [UseApplicationDbContext]
+    [UsePaging(typeof(NonNullType<SessionType>))]
+    [UseFiltering(typeof(SessionFilterInputType))]
+    [UseSorting]
+    public IQueryable<Session> GetSessions(
+      ApplicationDbContext context
+    ) =>
+      context.Sessions;
 
     public Task<Session> GetSessionByIdAsync(
         int id,

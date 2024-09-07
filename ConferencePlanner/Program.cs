@@ -31,6 +31,8 @@ builder
     .AddType<SpeakerType>()
     .AddType<TrackType>()
     .AddGlobalObjectIdentification() // instead of add relay support
+    .AddFiltering()
+    .AddSorting()
     .AddDataLoader<SpeakerByIdDataLoader>()
     .AddDataLoader<SessionByIdDataLoader>()
     .ModifyRequestOptions(options => options.IncludeExceptionDetails = true);

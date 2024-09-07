@@ -8,8 +8,11 @@ namespace ConferencePlanner.Queries;
 [ExtendObjectType("Query")]
 public class SpeakerQueries
 {
-    [UseApplicationDbContext]
-    public Task<List<Speaker>> GetSpeakers(ApplicationDbContext context) => context.Speakers.ToListAsync();
+    // [UseApplicationDbContext]
+    [UsePaging]
+    public IQueryable<Speaker> GetSpeakers(
+        ApplicationDbContext context
+    ) => context.Speakers.OrderBy(t => t.Name);
 
     public Task<Speaker> GetSpeakerByIdAsync(
         int id,
